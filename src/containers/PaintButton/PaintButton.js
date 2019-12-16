@@ -8,10 +8,14 @@ class PaintButton extends Component {
     super(props);
     this.state = {};
   }
+
+  savePainting = () => {
+    console.log("saving...")
+  }
   render() {
     return (
       <div>
-        <Button>Save</Button>
+        <Button onClick={this.savePainting}>Save</Button>
       </div>
     );
   }

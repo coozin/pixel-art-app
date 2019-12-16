@@ -51,6 +51,12 @@ class PaintTextfield extends Component {
                 id="title"
                 onChange={this.setTextVal}
                 autoFocus
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    this.handleClickAway();
+                    e.preventDefault();
+                  }
+                }}
               />
             }
             {!showInput &&

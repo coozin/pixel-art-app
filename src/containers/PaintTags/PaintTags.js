@@ -98,7 +98,6 @@ class PaintTags extends Component {
                 autoFocus
                 placeholder="example"
                 onKeyPress={(e) => {
-                  console.log(`Pressed keyCode ${e.key}`);
                   if (e.key === 'Enter') {
                     this.handleClickAway();
                     e.preventDefault();

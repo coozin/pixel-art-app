@@ -5,6 +5,7 @@ import './PaintingArea.styles.css';
 import PaintTextfield from '../PaintTextfield/PaintTextfield';
 import PaintTags from '../PaintTags/PaintTags';
 import PaintButton from '../PaintButton/PaintButton';
+import PixelArtArea from '../PixelArtArea/PixelArtArea';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -22,6 +23,9 @@ function PaintingArea() {
       </Grid>
 
       <PaintTags />
+
+      <PixelArtArea />
+
     </div>
   );
 }
