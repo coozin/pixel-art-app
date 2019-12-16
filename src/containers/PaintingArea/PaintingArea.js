@@ -3,7 +3,7 @@ import './PaintingArea.styles.css';
 
 function PaintingArea() {
   return (
-    <div>
+    <div className='PaintingArea'>
       PaintingArea
     </div>
   );
