@@ -3,7 +3,6 @@ import './App.css';
 import Notebook from './containers/Notebook/Notebook';
 import PaintingArea from './containers/PaintingArea/PaintingArea';
 import Grid from '@material-ui/core/Grid';
-// import Container from '@material-ui/core/Container';
 
 function App() {
   return (
