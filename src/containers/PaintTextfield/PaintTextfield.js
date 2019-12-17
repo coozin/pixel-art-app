@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// Actions
+import { savePaintingTitle } from '../../actions';
 import './PaintTextfield.styles.css';
 
 // Material UI
@@ -10,7 +15,7 @@ class PaintTextfield extends Component {
     super(props);
     this.state = {
       showInput: false,
-      textVal: "Title (click to edit)",
+      // textVal: "Title (click to edit)",
     };
   }
 
@@ -25,9 +30,10 @@ class PaintTextfield extends Component {
   }
 
   setTextVal = (e) => {
-    this.setState({
-      textVal: e.target.value
-    });
+    // this.setState({
+    //   textVal: e.target.value
+    // });
+    this.props.savePaintingTitle(e.target.value)
   }
 
   handleClickAway = () => {
@@ -39,8 +45,12 @@ class PaintTextfield extends Component {
   render() {
     const {
       showInput,
-      textVal,
+      // textVal,
     } = this.state;
+
+    const {
+      textVal
+    } = this.props;
 
     return (
       <div className='PaintTextfield'>
@@ -74,4 +84,21 @@ class PaintTextfield extends Component {
   }
 }
 
-export default PaintTextfield;
+// const mapStateToProps = textVal => ({
+//   textVal
+// })
+
+function mapStateToProps(state) {
+  const { textVal } = state.painting
+  console.log("state", state)
+  return { textVal }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ savePaintingTitle }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaintTextfield);

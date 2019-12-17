@@ -36,10 +36,9 @@ class PixelArtCanvas extends Component {
   }
 
   clickEv = (index) => {
-    console.log("index", index);
     const { colorSelected } = this.props;
     const { schema } = this.state;
-    console.log()
+
     let newSchema = [...schema];
     newSchema[index] = colorSelected;
     this.setState({
@@ -49,7 +48,6 @@ class PixelArtCanvas extends Component {
 
   render() {
     const { schema, size } = this.state;
-    const { colorSelected } = this.props;
 
     let boxes = [];
     let row = 0;
@@ -81,7 +79,11 @@ class PixelArtCanvas extends Component {
 
       if (addRow) {
         rows.push(
-          <Grid container>
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+          >
             {boxes}
           </Grid>
         );
@@ -89,8 +91,6 @@ class PixelArtCanvas extends Component {
       }
 
     }
-
-    console.log(rows)
 
     return (
       <div>

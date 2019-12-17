@@ -8,17 +8,13 @@ import Grid from '@material-ui/core/Grid';
 class PixelArtSelector extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // selectedColor: "white"
-    };
+    this.state = {};
   }
 
   clickEv = (color) => {
     const { colorSelectCallback } = this.props;
     console.log("selectedColor: color", color)
-    // this.setState({
-    //   selectedColor: color
-    // })
+
     colorSelectCallback(color)
   }
 
@@ -49,10 +45,10 @@ class PixelArtSelector extends Component {
           container
           direction="column"
           justify="center"
+          alignItems="center"
         >
           {boxes}
         </Grid>
-
       </div>
     );
   }
