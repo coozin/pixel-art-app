@@ -35,8 +35,16 @@ class PixelArtCanvas extends Component {
     this.setState({ schema: newSchema })
   }
 
-  clickEv = (target) => {
-    console.log("target", target);
+  clickEv = (index) => {
+    console.log("index", index);
+    const { colorSelected } = this.props;
+    const { schema } = this.state;
+    console.log()
+    let newSchema = [...schema];
+    newSchema[index] = colorSelected;
+    this.setState({
+      schema: newSchema
+    })
   }
 
   render() {
@@ -61,7 +69,7 @@ class PixelArtCanvas extends Component {
         <Grid item key={index}>
           <Box
             key={index}
-            onClick={(e) => this.clickEv(e.target)}
+            onClick={() => this.clickEv(index)}
             bgcolor={value}
             p={1}
             m={1}
