@@ -3,12 +3,16 @@ import { savePaintingTitle } from '../actions'
 let paintingID = 0;
 
 const defaultState = {
-  textVal: "Title (click here to edit)",
-  ID: paintingID,
-  colorArr: [],
-  paintingColors: [],
-  size: 16,
-  tags: [],
+  painting: {
+    textVal: "Title (click here to edit)",
+    ID: paintingID,
+    colorArr: [],
+    paintingColors: [],
+    size: 16,
+    tags: [],
+  },
+  paintings: [],
+  // selectedPainting: {},
 }
 
 const painting = (state = defaultState, action) => {
@@ -19,7 +23,11 @@ const painting = (state = defaultState, action) => {
       console.log("...in actions action", action)
       return {
         ...state,
-        textVal: action.textVal
+        painting: {
+          ...state.painting,
+          textVal: action.textVal,
+        }
+
       };
     case 'SET_COLOR_PALETTE':
       console.log("SET_COLOR_PALETTE in actions")
@@ -27,7 +35,11 @@ const painting = (state = defaultState, action) => {
       console.log("...in actions action", action)
       return {
         ...state,
-        colorArr: action.colors
+        painting: {
+          ...state.painting,
+          colorArr: action.colors,
+        }
+
       };
     case 'SAVE_PAINTING_COLORS':
       console.log("SAVE_PAINTING_COLORS in actions")
@@ -35,7 +47,11 @@ const painting = (state = defaultState, action) => {
       console.log("...in actions action", action)
       return {
         ...state,
-        paintingColors: action.colors
+        painting: {
+          ...state.painting,
+          paintingColors: action.colors,
+        }
+
       };
     case 'SAVE_CANVAS_SIZE':
       console.log("SAVE_CANVAS_SIZE in actions")
@@ -43,7 +59,10 @@ const painting = (state = defaultState, action) => {
       console.log("...in actions action", action)
       return {
         ...state,
-        size: action.size
+        painting: {
+          ...state.painting,
+          size: action.size,
+        }
       };
     case 'SAVE_PAINT_TAGS':
       console.log("SAVE_PAINT_TAGS in actions")
@@ -51,16 +70,46 @@ const painting = (state = defaultState, action) => {
       console.log("...in actions action", action)
       return {
         ...state,
-        tags: action.tags
+        painting: {
+          ...state.painting,
+          tags: action.tags,
+        }
       };
     case 'SAVE_PAINTING':
       console.log("SAVE_PAINTING in actions")
       console.log("...in actions state", state)
       console.log("...in actions action", action)
+      paintingID++;
       let paintings = JSON.parse(localStorage.getItem("paintings"))
       let newPaintings = [...paintings, action.painting]
       localStorage.setItem("paintings", JSON.stringify(newPaintings))
-      return state
+      return {
+        ...state,
+        paintings: [
+          ...newPaintings
+        ]
+      }
+    case 'SELECT_PAINTING':
+      console.log("SELECT_PAINTING in actions")
+      console.log("...in actions state", state)
+      console.log("...in actions action", action)
+      return {
+        ...state,
+        painting: action.selectedPainting
+      }
+    case 'LOAD_PAINTINGS':
+      console.log("LOAD_PAINTINGS in actions")
+      console.log("...in actions state", state)
+      console.log("...in actions action", action)
+      let paintingsFromLocal = JSON.parse(localStorage.getItem("paintings"))
+      let newPaintingsFromLocal = [...paintingsFromLocal]
+      // localStorage.setItem("paintings", JSON.stringify(newPaintings))
+      return {
+        ...state,
+        paintings: [
+          ...newPaintingsFromLocal
+        ]
+      }
     default:
       return state
   }

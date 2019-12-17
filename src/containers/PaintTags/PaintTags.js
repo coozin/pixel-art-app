@@ -128,7 +128,7 @@ class PaintTags extends Component {
 }
 
 function mapStateToProps(state) {
-  const { tags } = state.painting
+  const { tags } = state.painting.painting
   console.log("state (tags)", state)
   return { tags }
 }

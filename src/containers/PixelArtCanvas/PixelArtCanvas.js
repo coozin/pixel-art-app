@@ -106,7 +106,7 @@ class PixelArtCanvas extends Component {
 }
 
 function mapStateToProps(state) {
-  const { paintingColors: schema, size } = state.painting
+  const { paintingColors: schema, size } = state.painting.painting
   console.log("state paintingColors / schema", state.painting)
   return { schema, size };
 }

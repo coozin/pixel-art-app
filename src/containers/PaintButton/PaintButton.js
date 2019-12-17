@@ -24,7 +24,7 @@ class PaintButton extends Component {
 }
 
 function mapStateToProps(state) {
-  const { painting } = state
+  const { painting } = state.painting
   console.log("state painting", state)
   return { painting }
 }

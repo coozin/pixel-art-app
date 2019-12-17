@@ -39,9 +39,24 @@ export const savePaintTags = tags => {
 };
 
 export const savePainting = (painting) => {
-  console.log("savePainting action")
+  console.log("savePainting painting", painting)
   return {
     type: 'SAVE_PAINTING',
     painting
+  }
+}
+
+export const selectPainting = (selectedPainting) => {
+  console.log("selectPainting selectedPainting", selectedPainting)
+  return {
+    type: 'SELECT_PAINTING',
+    selectedPainting
+  }
+}
+
+export const loadPaintings = () => {
+  console.log("loadPaintings")
+  return {
+    type: 'LOAD_PAINTINGS'
   }
 }

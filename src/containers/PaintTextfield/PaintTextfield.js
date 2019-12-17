@@ -89,7 +89,7 @@ class PaintTextfield extends Component {
 // })
 
 function mapStateToProps(state) {
-  const { textVal } = state.painting
+  const { textVal } = state.painting.painting
   console.log("state", state)
   return { textVal }
 }
