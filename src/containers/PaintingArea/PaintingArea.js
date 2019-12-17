@@ -21,11 +21,8 @@ function PaintingArea() {
           <PaintButton />
         </Grid>
       </Grid>
-
       <PaintTags />
-
       <PixelArtArea />
-
     </div>
   );
 }

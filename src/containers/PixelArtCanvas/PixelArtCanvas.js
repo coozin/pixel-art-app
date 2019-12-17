@@ -1,0 +1,95 @@
+import React, { Component } from 'react';
+import './PixelArtCanvas.styles.css';
+
+// Material UI
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+
+class PixelArtCanvas extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      size: 16,
+      schema: [],
+    };
+  }
+
+  componentDidMount() {
+    this.init();
+  }
+
+  init = () => {
+    const { isNew } = this.props;
+    if (isNew) {
+      this.createNewSchema()
+    }
+  }
+
+  createNewSchema = () => {
+    const { size } = this.state;
+    const blocksNeeded = Math.pow(size, 2);
+    let newSchema = [];
+    for (let i = 0; i < blocksNeeded; i++) {
+      newSchema.push("darkGrey")
+    }
+    this.setState({ schema: newSchema })
+  }
+
+  clickEv = (target) => {
+    console.log("target", target);
+  }
+
+  render() {
+    const { schema, size } = this.state;
+    const { colorSelected } = this.props;
+
+    let boxes = [];
+    let row = 0;
+    let rows = [];
+
+    for (const [index, value] of schema.entries()) {
+
+      let nextRow = Math.floor((index + 1) / size);
+      let addRow = false;
+
+      if (row < nextRow) {
+        row++;
+        addRow = true;
+      }
+
+      boxes.push(
+        <Grid item key={index}>
+          <Box
+            key={index}
+            onClick={(e) => this.clickEv(e.target)}
+            bgcolor={value}
+            p={1}
+            m={1}
+            width="0"
+            className={`PixelArtCanvas-box`}
+          />
+        </Grid>
+      )
+
+      if (addRow) {
+        rows.push(
+          <Grid container>
+            {boxes}
+          </Grid>
+        );
+        boxes = [];
+      }
+
+    }
+
+    console.log(rows)
+
+    return (
+      <div>
+        {rows}
+      </div>
+    );
+  }
+}
+
+export default PixelArtCanvas;
