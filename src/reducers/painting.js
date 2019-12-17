@@ -1,5 +1,3 @@
-import { savePaintingTitle } from '../actions'
-
 let paintingID = 0;
 
 const defaultState = {
