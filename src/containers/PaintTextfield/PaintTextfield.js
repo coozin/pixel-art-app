@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import './PaintTextfield.styles.css';
 
 // Actions
 import { savePaintingTitle } from '../../actions';
-import './PaintTextfield.styles.css';
 
 // Material UI
 import TextField from '@material-ui/core/TextField';

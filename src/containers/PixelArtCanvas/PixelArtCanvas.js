@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './PixelArtCanvas.styles.css';
+
+// Actions
+import {
+  savePaintingColors,
+  saveCanvasSize,
+} from '../../actions';
 
 // Material UI
 import Box from '@material-ui/core/Box';
@@ -9,8 +17,8 @@ class PixelArtCanvas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: 16,
-      schema: [],
+      // size: 16,
+      // schema: [],
     };
   }
 
@@ -26,70 +34,75 @@ class PixelArtCanvas extends Component {
   }
 
   createNewSchema = () => {
-    const { size } = this.state;
+    const { size } = this.props;
     const blocksNeeded = Math.pow(size, 2);
     let newSchema = [];
     for (let i = 0; i < blocksNeeded; i++) {
       newSchema.push("darkGrey")
     }
-    this.setState({ schema: newSchema })
+    // this.setState({ schema: newSchema })
+    this.props.savePaintingColors(newSchema)
   }
 
   clickEv = (index) => {
-    const { colorSelected } = this.props;
-    const { schema } = this.state;
+    const { colorSelected, schema } = this.props;
+    // const { schema } = this.state;
 
     let newSchema = [...schema];
     newSchema[index] = colorSelected;
-    this.setState({
-      schema: newSchema
-    })
+    // this.setState({
+    //   schema: newSchema
+    // })
+    this.props.savePaintingColors(newSchema)
   }
 
   render() {
-    const { schema, size } = this.state;
+    const { schema, size } = this.props;
+    // const { size } = this.state;
 
     let boxes = [];
     let row = 0;
     let rows = [];
 
-    for (const [index, value] of schema.entries()) {
+    if (schema && schema.length > 0) {
+      for (const [index, value] of schema.entries()) {
 
-      let nextRow = Math.floor((index + 1) / size);
-      let addRow = false;
+        let nextRow = Math.floor((index + 1) / size);
+        let addRow = false;
 
-      if (row < nextRow) {
-        row++;
-        addRow = true;
-      }
+        if (row < nextRow) {
+          row++;
+          addRow = true;
+        }
 
-      boxes.push(
-        <Grid item key={index}>
-          <Box
-            key={index}
-            onClick={() => this.clickEv(index)}
-            bgcolor={value}
-            p={1}
-            m={1}
-            width="0"
-            className={`PixelArtCanvas-box`}
-          />
-        </Grid>
-      )
-
-      if (addRow) {
-        rows.push(
-          <Grid
-            container
-            alignItems="center"
-            justify="center"
-          >
-            {boxes}
+        boxes.push(
+          <Grid item key={index}>
+            <Box
+              key={index}
+              onClick={() => this.clickEv(index)}
+              bgcolor={value}
+              p={1}
+              m={1}
+              width="0"
+              className={`PixelArtCanvas-box`}
+            />
           </Grid>
-        );
-        boxes = [];
-      }
+        )
 
+        if (addRow) {
+          rows.push(
+            <Grid
+              container
+              alignItems="center"
+              justify="center"
+            >
+              {boxes}
+            </Grid>
+          );
+          boxes = [];
+        }
+
+      }
     }
 
     return (
@@ -100,4 +113,17 @@ class PixelArtCanvas extends Component {
   }
 }
 
-export default PixelArtCanvas;
+function mapStateToProps(state) {
+  const { paintingColors: schema, size } = state.painting
+  console.log("state paintingColors / schema", state.painting)
+  return { schema, size };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ savePaintingColors, saveCanvasSize }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PixelArtCanvas);

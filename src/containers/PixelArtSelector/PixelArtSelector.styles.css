@@ -7,7 +7,7 @@
 }
 
 .PixelArtSelector-selected {
-  border: 1px solid black;
+  border: 1px solid black !important;
 }
 
 .PixelArtSelector-container {

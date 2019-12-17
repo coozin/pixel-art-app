@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -7,25 +9,37 @@ import Grid from '@material-ui/core/Grid';
 import PixelArtSelector from '../PixelArtSelector/PixelArtSelector';
 import PixelArtCanvas from '../PixelArtCanvas/PixelArtCanvas';
 
+// Actions
+import { setColorPalette } from '../../actions';
+
+const DEFAULT_COLOR_ARR = [
+  "white",
+  "black",
+  "green",
+  "darkGrey",
+  "red",
+  "blue",
+  "orange",
+  "pink",
+  "yellow",
+  "purple",
+];
+
 class PixelArtArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
       colorSelected: "white",
-      colorArr: [
-        "white",
-        "black",
-        "green",
-        "darkGrey",
-        "red",
-        "blue",
-        "orange",
-        "pink",
-        "yellow",
-        "purple",
-      ],
       isNew: true,
     };
+  }
+
+  componentDidMount() {
+    this.init()
+  }
+
+  init = () => {
+    this.props.setColorPalette(DEFAULT_COLOR_ARR)
   }
 
   colorSelectCallback = (color) => {
@@ -37,9 +51,10 @@ class PixelArtArea extends Component {
   render() {
     const {
       colorSelected,
-      colorArr,
       isNew,
     } = this.state;
+
+    const { colorArr } = this.props;
 
     return (
       <div>
@@ -65,4 +80,17 @@ class PixelArtArea extends Component {
   }
 }
 
-export default PixelArtArea;
+function mapStateToProps(state) {
+  const { colorArr } = state.painting
+  console.log("state colorArr", state)
+  return { colorArr }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setColorPalette }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PixelArtArea);

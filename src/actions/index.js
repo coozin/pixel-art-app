@@ -5,3 +5,27 @@ export const savePaintingTitle = textVal => {
     textVal
   }
 };
+
+export const setColorPalette = colors => {
+  console.log("setColorPalette", colors)
+  return {
+    type: 'SET_COLOR_PALETTE',
+    colors
+  }
+};
+
+export const savePaintingColors = colors => {
+  console.log("savePaintingColors", colors)
+  return {
+    type: 'SAVE_PAINTING_COLORS',
+    colors
+  }
+};
+
+export const saveCanvasSize = size => {
+  console.log("saveCanvasSize", size)
+  return {
+    type: 'SAVE_CANVAS_SIZE',
+    size
+  }
+};

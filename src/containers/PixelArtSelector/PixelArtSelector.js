@@ -23,20 +23,22 @@ class PixelArtSelector extends Component {
 
     const boxes = [];
 
-    for (const [index, value] of colorArr.entries()) {
-      boxes.push(
-        <Grid item xs={1} key={index}>
-          <Box
-            key={index}
-            onClick={() => this.clickEv(value)}
-            bgcolor={value}
-            p={1}
-            m={1}
-            width="0"
-            className={`PixelArtSelector-box ${colorSelected === value ? "PixelArtSelector-selected" : ''}`}
-          />
-        </Grid>
-      )
+    if (colorArr && colorArr.length > 0) {
+      for (const [index, value] of colorArr.entries()) {
+        boxes.push(
+          <Grid item xs={1} key={index}>
+            <Box
+              key={index}
+              onClick={() => this.clickEv(value)}
+              bgcolor={value}
+              p={1}
+              m={1}
+              width="0"
+              className={`PixelArtSelector-box ${colorSelected === value ? "PixelArtSelector-selected" : ''}`}
+            />
+          </Grid>
+        )
+      }
     }
 
     return (
