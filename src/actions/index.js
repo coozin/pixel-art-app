@@ -29,3 +29,11 @@ export const saveCanvasSize = size => {
     size
   }
 };
+
+export const savePaintTags = tags => {
+  console.log("savePaintTags", tags)
+  return {
+    type: 'SAVE_PAINT_TAGS',
+    tags
+  }
+};

@@ -8,6 +8,7 @@ const defaultState = {
   colorArr: [],
   paintingColors: [],
   size: 16,
+  tags: [],
 }
 
 const painting = (state = defaultState, action) => {
@@ -16,7 +17,10 @@ const painting = (state = defaultState, action) => {
       console.log("SAVE_PAINTING_TITLE in actions")
       console.log("...in actions state", state)
       console.log("...in actions action", action)
-      return action;
+      return {
+        ...state,
+        textVal: action.textVal
+      };
     case 'SET_COLOR_PALETTE':
       console.log("SET_COLOR_PALETTE in actions")
       console.log("...in actions state", state)
@@ -40,6 +44,14 @@ const painting = (state = defaultState, action) => {
       return {
         ...state,
         size: action.size
+      };
+    case 'SAVE_PAINT_TAGS':
+      console.log("SAVE_PAINT_TAGS in actions")
+      console.log("...in actions state", state)
+      console.log("...in actions action", action)
+      return {
+        ...state,
+        tags: action.tags
       };
     default:
       return state

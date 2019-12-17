@@ -16,10 +16,7 @@ import Grid from '@material-ui/core/Grid';
 class PixelArtCanvas extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // size: 16,
-      // schema: [],
-    };
+    // this.state = {};
   }
 
   componentDidMount() {
@@ -40,25 +37,20 @@ class PixelArtCanvas extends Component {
     for (let i = 0; i < blocksNeeded; i++) {
       newSchema.push("darkGrey")
     }
-    // this.setState({ schema: newSchema })
     this.props.savePaintingColors(newSchema)
   }
 
   clickEv = (index) => {
     const { colorSelected, schema } = this.props;
-    // const { schema } = this.state;
 
     let newSchema = [...schema];
     newSchema[index] = colorSelected;
-    // this.setState({
-    //   schema: newSchema
-    // })
+
     this.props.savePaintingColors(newSchema)
   }
 
   render() {
     const { schema, size } = this.props;
-    // const { size } = this.state;
 
     let boxes = [];
     let row = 0;

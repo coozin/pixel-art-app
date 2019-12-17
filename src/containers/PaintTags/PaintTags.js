@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// Actions
+import { savePaintTags } from '../../actions';
 
 // Material UI
 import Chip from '@material-ui/core/Chip';
@@ -14,22 +19,25 @@ class PaintTags extends Component {
     super(props);
     this.state = {
       showAddChip: false,
-      tagArr: ["these", "are", "some", "example", "chips"],
+      // tagArr: ["these", "are", "some", "example", "chips"],
       tempTagVal: "",
     };
   }
 
   handleDelete = (value) => {
-    const { tagArr } = this.state;
-    const newArr = [];
-    for (let i = 0; i < tagArr.length; i++) {
-      if (tagArr[i] !== value) {
-        newArr.push(tagArr[i])
+    // const { tagArr } = this.state;
+    const { tags } = this.props;
+    const newTags = [];
+    for (let i = 0; i < tags.length; i++) {
+      if (tags[i] !== value) {
+        newTags.push(tags[i])
       }
     }
-    this.setState({
-      tagArr: newArr,
-    })
+    // this.setState({
+    //   tagArr: newTags,
+    // })
+
+    this.props.savePaintTags(newTags)
   }
 
   toggleModal = () => {
@@ -50,11 +58,15 @@ class PaintTags extends Component {
   }
 
   addTag = (newTag) => {
-    const newArr = [...this.state.tagArr];
-    newArr.push(newTag);
-    this.setState({
-      tagArr: newArr,
-    }, this.resetChipDisplay)
+    const { tags } = this.props;
+    const newTags = [...tags];
+    newTags.push(newTag);
+    // this.setState({
+    //   tagArr: newTags,
+    // }, this.resetChipDisplay)
+    this.props.savePaintTags(newTags)
+
+    this.resetChipDisplay()
   }
 
   resetChipDisplay = () => {
@@ -65,19 +77,22 @@ class PaintTags extends Component {
   }
 
   render() {
-    const { tagArr, showAddChip } = this.state;
+    const { tags } = this.props;
+    const { showAddChip } = this.state;
     const chips = []
 
-    for (const [index, value] of tagArr.entries()) {
-      chips.push(
-        <Chip
-          variant="outlined"
-          size="small"
-          label={value}
-          key={index}
-          onDelete={() => this.handleDelete(value)}
-        />
-      )
+    if (tags && tags.length > 0) {
+      for (const [index, value] of tags.entries()) {
+        chips.push(
+          <Chip
+            variant="outlined"
+            size="small"
+            label={value}
+            key={index}
+            onDelete={() => this.handleDelete(value)}
+          />
+        )
+      }
     }
 
     return (
@@ -112,4 +127,17 @@ class PaintTags extends Component {
   }
 }
 
-export default PaintTags;
+function mapStateToProps(state) {
+  const { tags } = state.painting
+  console.log("state (tags)", state)
+  return { tags }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ savePaintTags }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaintTags);
