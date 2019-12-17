@@ -26,6 +26,12 @@ class NotebookList extends Component {
     this.props.loadPaintings()
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps && nextProps.paintings && nextProps.paintings.length > 0) {
+      this.setState({ filteredPaintings: [] })
+    }
+  }
+
   handleOnClick = (selectedPainting) => {
     console.log("handleOnClick", selectedPainting)
     this.props.selectPainting(selectedPainting)
