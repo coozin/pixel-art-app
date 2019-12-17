@@ -11,12 +11,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 // Actions
 import { selectPainting, loadPaintings } from '../../actions';
 
+// Containers
+import NotebookSearch from '../NotebookSearch/NotebookSearch';
+
 class NotebookList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // paintings: [],
-      showAltView: true,
+      filteredPaintings: [],
     };
   }
 
@@ -24,33 +26,50 @@ class NotebookList extends Component {
     this.props.loadPaintings()
   }
 
-  // shouldComponentUpdate(nextProps) {
-  //   const { paintings } = this.props;
-
-  //   if (nextProps.paintings && nextProps.paintings.length > paintings.length)
-  //   console.log("paintings componentWillReceiveProps", paintings)
-  //   if (paintings && paintings.length > 0) {
-  //     this.setState({
-  //       showAltView: false
-  //     })
-  //   }
-  // }
-
   handleOnClick = (selectedPainting) => {
     console.log("handleOnClick", selectedPainting)
     this.props.selectPainting(selectedPainting)
   }
+
+  filterCallback = (search) => {
+    const { paintings } = this.props;
+    console.log("search", search)
+
+    let filteredList = [];
+
+    for (let i = 0; i < paintings.length; i++) {
+      let currentPainting = paintings[i];
+
+      if (currentPainting.textVal.includes(search)) {
+
+        filteredList.push(currentPainting)
+      } else {
+        console.log("enters ELSE!")
+        for (let j = 0; j < currentPainting.tags.length; j++) {
+          console.log("currentPainting.tags", currentPainting.tags)
+          if (currentPainting.tags[j].includes(search)) {
+            filteredList.push(currentPainting)
+            break;
+          }
+        }
+      }
+    }
+
+    this.setState({ filteredPaintings: filteredList })
+  }
+
   render() {
-    const { paintings } = this.props
-    const { showAltView } = this.state;
+    const { paintings } = this.props;
+    const { filteredPaintings } = this.state;
 
     let myPaintings = []
 
-    console.log("showAltView render", showAltView)
+    let paintingsShown = filteredPaintings && filteredPaintings.length > 0 ? filteredPaintings : paintings
 
-    // if (!showAltView) {
-    if (paintings && paintings.length > 0) {
-      for (const [index, value] of paintings.entries()) {
+    console.log("paintingsShown", paintingsShown)
+
+    if (paintingsShown && paintingsShown.length > 0) {
+      for (const [index, value] of paintingsShown.entries()) {
         console.log("index", index)
         console.log("value", value)
         let tempStr = "";
@@ -70,10 +89,9 @@ class NotebookList extends Component {
       myPaintings = "no paintings saved yet"
     }
 
-    // }
-
     return (
       <div className='NotebookList'>
+        <NotebookSearch filterCallback={this.filterCallback} />
         <List>
           {myPaintings}
         </List>
