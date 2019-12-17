@@ -37,3 +37,11 @@ export const savePaintTags = tags => {
     tags
   }
 };
+
+export const savePainting = (painting) => {
+  console.log("savePainting action")
+  return {
+    type: 'SAVE_PAINTING',
+    painting
+  }
+}

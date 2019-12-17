@@ -53,6 +53,14 @@ const painting = (state = defaultState, action) => {
         ...state,
         tags: action.tags
       };
+    case 'SAVE_PAINTING':
+      console.log("SAVE_PAINTING in actions")
+      console.log("...in actions state", state)
+      console.log("...in actions action", action)
+      let paintings = JSON.parse(localStorage.getItem("paintings"))
+      let newPaintings = [...paintings, action.painting]
+      localStorage.setItem("paintings", JSON.stringify(newPaintings))
+      return state
     default:
       return state
   }

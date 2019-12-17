@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// Actions
+import { savePainting } from '../../actions';
 
 // Material UI
 import Button from '@material-ui/core/Button';
@@ -9,16 +14,26 @@ class PaintButton extends Component {
     this.state = {};
   }
 
-  savePainting = () => {
-    console.log("saving...")
-  }
   render() {
     return (
       <div>
-        <Button onClick={this.savePainting}>Save</Button>
+        <Button onClick={() => this.props.savePainting(this.props.painting)}>Save</Button>
       </div>
     );
   }
 }
 
-export default PaintButton;
+function mapStateToProps(state) {
+  const { painting } = state
+  console.log("state painting", state)
+  return { painting }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ savePainting }, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaintButton);
