@@ -3,3 +3,9 @@
   min-height: 90vh;
   background-color: #dcdcdc;
 }
+
+.Notebook-title {
+  font-size: 20px;
+  color: #282c34;
+  padding: 20px;
+}

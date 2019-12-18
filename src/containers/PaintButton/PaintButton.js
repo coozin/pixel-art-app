@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import './PaintButton.styles.css';
 
 // Actions
 import { savePainting } from '../../actions';
@@ -17,7 +18,15 @@ class PaintButton extends Component {
   render() {
     return (
       <div>
-        <Button onClick={() => this.props.savePainting(this.props.painting)}>Save</Button>
+        <Button
+          onClick={() => this.props.savePainting(this.props.painting)}
+          variant="contained"
+          style={{
+            "background-color": "#28a231",
+            "color": "white",
+            "margin": "10px",
+          }}
+        >Save</Button>
       </div>
     );
   }
@@ -25,7 +34,6 @@ class PaintButton extends Component {
 
 function mapStateToProps(state) {
   const { painting } = state.painting
-  console.log("state painting", state)
   return { painting }
 }
 

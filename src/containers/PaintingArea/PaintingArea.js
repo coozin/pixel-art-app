@@ -16,13 +16,13 @@ function PaintingArea() {
       <Grid container>
         <Grid item xs={10}>
           <PaintTextfield />
+          <PixelArtArea />
         </Grid>
         <Grid item xs={2}>
           <PaintButton />
+          <PaintTags />
         </Grid>
       </Grid>
-      <PaintTags />
-      <PixelArtArea />
     </div>
   );
 }

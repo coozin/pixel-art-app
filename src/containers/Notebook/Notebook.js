@@ -8,7 +8,9 @@ import NotebookButtonGroup from '../NotebookButtonGroup/NotebookButtonGroup';
 function Notebook() {
   return (
     <div className='Notebook'>
-      <h2 style={{ margin: 0, padding: 10 }}>Notebook</h2>
+      <div className="Notebook-title">
+        Notebook
+      </div>
 
       <NotebookList />
       <NotebookButtonGroup />

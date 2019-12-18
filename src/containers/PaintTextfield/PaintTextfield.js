@@ -15,7 +15,6 @@ class PaintTextfield extends Component {
     super(props);
     this.state = {
       showInput: false,
-      // textVal: "Title (click to edit)",
     };
   }
 
@@ -30,9 +29,6 @@ class PaintTextfield extends Component {
   }
 
   setTextVal = (e) => {
-    // this.setState({
-    //   textVal: e.target.value
-    // });
     this.props.savePaintingTitle(e.target.value)
   }
 
@@ -45,7 +41,6 @@ class PaintTextfield extends Component {
   render() {
     const {
       showInput,
-      // textVal,
     } = this.state;
 
     const {
@@ -67,6 +62,10 @@ class PaintTextfield extends Component {
                     e.preventDefault();
                   }
                 }}
+                variant="outlined"
+                size="small"
+                style={{ padding: "11px" }}
+                placeholder="Title"
               />
             }
             {!showInput &&
@@ -84,13 +83,8 @@ class PaintTextfield extends Component {
   }
 }
 
-// const mapStateToProps = textVal => ({
-//   textVal
-// })
-
 function mapStateToProps(state) {
   const { textVal } = state.painting.painting
-  console.log("state", state)
   return { textVal }
 }
 

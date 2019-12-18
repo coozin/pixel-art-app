@@ -10,6 +10,7 @@ import Chip from '@material-ui/core/Chip';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grid from '@material-ui/core/Grid';
 
 // Icons
 import AddIcon from '@material-ui/icons/Add';
@@ -48,6 +49,8 @@ class PaintTags extends Component {
     const { tempTagVal } = this.state;
     if (tempTagVal !== "") {
       this.addTag(tempTagVal)
+    } else {
+      this.resetChipDisplay()
     }
   }
 
@@ -84,43 +87,59 @@ class PaintTags extends Component {
     if (tags && tags.length > 0) {
       for (const [index, value] of tags.entries()) {
         chips.push(
-          <Chip
-            variant="outlined"
-            size="small"
-            label={value}
-            key={index}
-            onDelete={() => this.handleDelete(value)}
-          />
+          <Grid item style={{ margin: "5px" }}>
+            <Chip
+              variant="outlined"
+              size="small"
+              label={value}
+              key={index}
+              onDelete={() => this.handleDelete(value)}
+            />
+          </Grid>
         )
       }
     }
 
     return (
-      <div>
+      <div style={{ padding: "25px 0" }}>
         <ClickAwayListener onClickAway={this.handleClickAway}>
-          <div>
-            {chips}
-            <Fab
-              aria-label="add"
-              size='small'
-            >
-              <AddIcon onClick={this.toggleModal} />
-            </Fab>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item style={{ margin: "5px" }}>
+              <Fab
+                aria-label="add"
+                size='small'
+                variant="extended"
+                onClick={this.toggleModal}
+
+              >
+                <AddIcon />
+                Add Tag
+              </Fab>
+            </Grid>
+
             {showAddChip &&
-              <TextField
-                id="title"
-                onChange={this.setTempTagVal}
-                autoFocus
-                placeholder="example"
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    this.handleClickAway();
-                    e.preventDefault();
-                  }
-                }}
-              />
+              <Grid item style={{ margin: "5px" }}>
+                <TextField
+                  id="title"
+                  onChange={this.setTempTagVal}
+                  autoFocus
+                  placeholder="example"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      this.handleClickAway();
+                      e.preventDefault();
+                    }
+                  }}
+                />
+              </Grid>
             }
-          </div>
+            {chips}
+          </Grid>
         </ClickAwayListener>
       </div>
     );
@@ -129,7 +148,6 @@ class PaintTags extends Component {
 
 function mapStateToProps(state) {
   const { tags } = state.painting.painting
-  console.log("state (tags)", state)
   return { tags }
 }
 
