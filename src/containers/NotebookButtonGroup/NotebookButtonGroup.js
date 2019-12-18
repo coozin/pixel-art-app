@@ -47,7 +47,7 @@ class NotebookButtonGroup extends Component {
         <ButtonGroup
           // color="primary"
           aria-label="contained primary button group"
-          size="medium"
+          size="small"
         >
           <Button
             variant="contained"

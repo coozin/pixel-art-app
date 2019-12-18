@@ -52,3 +52,9 @@ export const loadPaintings = () => {
     type: 'LOAD_PAINTINGS'
   }
 }
+
+export const resetPainting = () => {
+  return {
+    type: 'RESET_PAINTING'
+  }
+}

@@ -14,13 +14,14 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
 class PixelArtCanvas extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {};
-  // }
-
   componentDidMount() {
     this.init();
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.schema && nextProps.schema.length === 0) {
+      this.createNewSchema()
+    }
   }
 
   init = () => {

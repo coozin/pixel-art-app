@@ -84,6 +84,11 @@ const painting = (state = defaultState, action) => {
           ...newPaintingsFromLocal
         ]
       }
+    case 'RESET_PAINTING':
+      return {
+        ...state,
+        painting: defaultState.painting
+      }
     default:
       return state
   }

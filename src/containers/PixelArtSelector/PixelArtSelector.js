@@ -32,9 +32,14 @@ class PixelArtSelector extends Component {
                 key={index}
                 onClick={() => this.clickEv(value)}
                 bgcolor={value}
-                p={1}
-                m={1}
-                width="0"
+                p={2}
+                m={0}
+                style={{
+                  margin: "0 !important",
+                  width: "20px !important",
+                  height: "20px !important",
+                  padding: "0 !important",
+                }}
                 className={`PixelArtSelector-box ${colorSelected === value ? "PixelArtSelector-selected" : ''}`}
               />
             </Grid>
@@ -46,9 +51,14 @@ class PixelArtSelector extends Component {
                 key={index}
                 onClick={() => this.clickEv(value)}
                 bgcolor={value}
-                p={1}
-                m={1}
-                width="0"
+                p={2}
+                m={0}
+                style={{
+                  margin: "0 !important",
+                  width: "20px !important",
+                  height: "20px !important",
+                  padding: "0 !important",
+                }}
                 className={`PixelArtSelector-box ${colorSelected === value ? "PixelArtSelector-selected" : ''}`}
               />
             </Grid>

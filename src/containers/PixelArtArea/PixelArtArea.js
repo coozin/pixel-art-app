@@ -44,6 +44,12 @@ class PixelArtArea extends Component {
     this.init()
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.colorArr && nextProps.colorArr.length === 0) {
+      this.init()
+    }
+  }
+
   init = () => {
     this.props.setColorPalette(DEFAULT_COLOR_ARR)
   }

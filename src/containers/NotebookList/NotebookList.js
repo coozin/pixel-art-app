@@ -26,7 +26,7 @@ class NotebookList extends Component {
     this.props.loadPaintings()
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps && nextProps.paintings && nextProps.paintings.length > 0) {
       this.setState({ filteredPaintings: [] })
     }
