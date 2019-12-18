@@ -33,13 +33,11 @@ class NotebookList extends Component {
   }
 
   handleOnClick = (selectedPainting) => {
-    console.log("handleOnClick", selectedPainting)
     this.props.selectPainting(selectedPainting)
   }
 
   filterCallback = (search) => {
     const { paintings } = this.props;
-    console.log("search", search)
 
     let filteredList = [];
 
@@ -50,9 +48,7 @@ class NotebookList extends Component {
 
         filteredList.push(currentPainting)
       } else {
-        console.log("enters ELSE!")
         for (let j = 0; j < currentPainting.tags.length; j++) {
-          console.log("currentPainting.tags", currentPainting.tags)
           if (currentPainting.tags[j].includes(search)) {
             filteredList.push(currentPainting)
             break;
@@ -70,14 +66,10 @@ class NotebookList extends Component {
 
     let myPaintings = []
 
-    let paintingsShown = filteredPaintings && filteredPaintings.length > 0 ? filteredPaintings : paintings
-
-    console.log("paintingsShown", paintingsShown)
+    let paintingsShown = filteredPaintings && filteredPaintings.length > 0 ? filteredPaintings : paintings;
 
     if (paintingsShown && paintingsShown.length > 0) {
       for (const [index, value] of paintingsShown.entries()) {
-        console.log("index", index)
-        console.log("value", value)
         let tempStr = "";
         if (value.tags && value.tags.length > 0) {
           for (let i = 0; i < value.tags.length; i++) {
@@ -108,7 +100,7 @@ class NotebookList extends Component {
 
 function mapStateToProps(state) {
   const { selectedPainting, paintings } = state.painting
-  console.log("state selectedPainting", state)
+
   return { selectedPainting, paintings }
 }
 

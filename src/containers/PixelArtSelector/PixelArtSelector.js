@@ -25,7 +25,7 @@ class PixelArtSelector extends Component {
 
     if (colorArr && colorArr.length > 0) {
       for (const [index, value] of colorArr.entries()) {
-        if (index % 2 == 0) {
+        if (index % 2 === 0) {
           boxes1.push(
             <Grid item xs={1} key={index}>
               <Box
@@ -62,20 +62,12 @@ class PixelArtSelector extends Component {
         <Grid
           container
           direction="row"
-        // justify="center"
-        // alignItems="center"
         >
           <Grid
-            direction="column"
-            justify="center"
-            alignItems="center"
           >
             {boxes1}
           </Grid>
           <Grid
-            direction="column"
-            justify="center"
-            alignItems="center"
           >
             {boxes2}
           </Grid>

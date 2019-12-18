@@ -22,7 +22,7 @@ class PaintButton extends Component {
           onClick={() => this.props.savePainting(this.props.painting)}
           variant="contained"
           style={{
-            "background-color": "#28a231",
+            backgroundColor: "#28a231",
             "color": "white",
             "margin": "10px",
           }}

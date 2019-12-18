@@ -88,7 +88,6 @@ class PixelArtArea extends Component {
 
 function mapStateToProps(state) {
   const { colorArr } = state.painting.painting
-  console.log("state colorArr", state)
   return { colorArr }
 }
 

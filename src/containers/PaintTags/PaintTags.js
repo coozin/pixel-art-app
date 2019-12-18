@@ -87,7 +87,7 @@ class PaintTags extends Component {
     if (tags && tags.length > 0) {
       for (const [index, value] of tags.entries()) {
         chips.push(
-          <Grid item style={{ margin: "5px" }}>
+          <Grid item style={{ margin: "5px" }} key={index}>
             <Chip
               variant="outlined"
               size="small"

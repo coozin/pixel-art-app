@@ -75,7 +75,6 @@ class PixelArtCanvas extends Component {
               bgcolor={value}
               p={2}
               m={0}
-              // width="0"
               style={{
                 margin: "0 !important",
                 width: "20px !important",
@@ -93,6 +92,7 @@ class PixelArtCanvas extends Component {
               container
               alignItems="center"
               justify="center"
+              key={row}
             >
               {boxes}
             </Grid>

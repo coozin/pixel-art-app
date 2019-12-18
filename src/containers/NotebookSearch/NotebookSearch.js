@@ -12,7 +12,6 @@ class NotebookSearch extends Component {
 
   handleOnChange = (e) => {
     const { filterCallback } = this.props;
-    console.log("handleOnChange of search e", e)
     filterCallback(e.target.value)
   }
 
