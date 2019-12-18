@@ -128,7 +128,7 @@ class PaintTags extends Component {
                   id="title"
                   onChange={this.setTempTagVal}
                   autoFocus
-                  placeholder="example"
+                  placeholder="tag"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       this.handleClickAway();

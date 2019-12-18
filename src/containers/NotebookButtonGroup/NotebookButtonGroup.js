@@ -45,31 +45,32 @@ class NotebookButtonGroup extends Component {
     return (
       <div className='NotebookButtonGroup'>
         <ButtonGroup
-          color="primary"
+          // color="primary"
           aria-label="contained primary button group"
-          size="small"
+          size="medium"
         >
           <Button
             variant="contained"
             startIcon={<SystemUpdateAltIcon />}
             onClick={() => this.handleImport()}
+            color="primary"
           >
             Import
           </Button>
           <Button
+            variant="contained"
             startIcon={<PublishIcon />}
             onClick={() => this.handleExport()}
+            color="secondary"
           >
             Export
           </Button>
         </ButtonGroup>
-
         <ImportExportDialog
           showDialog={showDialog}
           closeDialog={this.closeDialog}
           isImport={isImport}
         />
-
       </div>
     );
   }

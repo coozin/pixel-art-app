@@ -13,10 +13,10 @@ function App() {
         </p>
       </header>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <Notebook />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={9}>
           <PaintingArea />
         </Grid>
       </Grid>

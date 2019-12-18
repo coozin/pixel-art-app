@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import './ImportExportDialog.styles.css';
 
 // Actions
 import { savePainting } from '../../actions';
@@ -13,7 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
+// import Tooltip from '@material-ui/core/Tooltip';
 
 class ImportExportDialog extends Component {
   constructor(props) {
@@ -26,7 +27,6 @@ class ImportExportDialog extends Component {
   }
 
   handleClose = () => {
-    console.log("need callback")
     const { closeDialog } = this.props;
     closeDialog();
   }
@@ -53,25 +53,35 @@ class ImportExportDialog extends Component {
     copyText.setSelectionRange(0, 99999);
     document.execCommand("copy");
 
-    this.handleOpenTooltip()
+    // this.handleOpenTooltip()
   }
 
-  handleCloseTooltip = () => {
-    this.setState({
-      openTooltip: false,
-    })
-  }
-  handleOpenTooltip = () => {
-    this.setState({
-      openTooltip: true,
-    })
-  }
+  // handleCloseTooltip = () => {
+  //   this.setState({
+  //     openTooltip: false,
+  //   })
+  // }
+  // handleOpenTooltip = () => {
+  //   this.setState({
+  //     openTooltip: true,
+  //   })
+  // }
 
   render() {
-    const { showDialog, isImport, painting } = this.props;
-    console.log("painting", painting)
+    const {
+      showDialog,
+      isImport,
+      painting
+    } = this.props;
+
     return (
-      <Dialog onClose={this.handleClose} aria-labelledby="customized-dialog-title" open={showDialog}>
+      <Dialog
+        onClose={this.handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={showDialog}
+        maxWidth="lg"
+        fullWidth
+      >
         <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
           {isImport ? "Import" : "Export"}
         </DialogTitle>
@@ -80,11 +90,15 @@ class ImportExportDialog extends Component {
             {isImport ? "Paste your schema below and save." : "Copy your schema below and save to a plain text file."}
           </Typography>
           {isImport ?
-            <TextareaAutosize rowsMin={3} onChange={e => this.handleChange(e.target.value)} /> :
             <TextareaAutosize
-              rowsMin={3}
+              rowsMin={10}
+              onChange={e => this.handleChange(e.target.value)}
+              className="ImportExportDialog-textarea"
+            /> :
+            <TextareaAutosize
+              rowsMin={10}
               ref={this.myRef}
-              style={{ width: "100%" }}
+              className="ImportExportDialog-textarea"
             >
               {JSON.stringify(painting)}
             </TextareaAutosize>
@@ -123,9 +137,7 @@ class ImportExportDialog extends Component {
                 Close
               </Button>
             </div>
-
           }
-
         </DialogActions>
       </Dialog>
     );
@@ -134,7 +146,6 @@ class ImportExportDialog extends Component {
 
 function mapStateToProps(state) {
   const { painting } = state.painting
-  console.log("state painting", state)
   return { painting }
 }
 
