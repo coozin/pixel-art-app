@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import './PixelArtCanvas.styles.css';
+// import './PixelArtCanvas.styles.css';
 
 // Actions
 import {
@@ -73,10 +73,16 @@ class PixelArtCanvas extends Component {
               key={index}
               onClick={() => this.clickEv(index)}
               bgcolor={value}
-              p={1}
-              m={1}
-              width="0"
-              className={`PixelArtCanvas-box`}
+              p={2}
+              m={0}
+              // width="0"
+              style={{
+                margin: "0 !important",
+                width: "20px !important",
+                height: "20px !important",
+                padding: "0 !important",
+                border: "1px black dotted"
+              }}
             />
           </Grid>
         )
@@ -93,7 +99,6 @@ class PixelArtCanvas extends Component {
           );
           boxes = [];
         }
-
       }
     }
 
@@ -107,7 +112,6 @@ class PixelArtCanvas extends Component {
 
 function mapStateToProps(state) {
   const { paintingColors: schema, size } = state.painting.painting
-  console.log("state paintingColors / schema", state.painting)
   return { schema, size };
 }
 

@@ -115,7 +115,6 @@ class PaintTags extends Component {
                 size='small'
                 variant="extended"
                 onClick={this.toggleModal}
-
               >
                 <AddIcon />
                 Add Tag

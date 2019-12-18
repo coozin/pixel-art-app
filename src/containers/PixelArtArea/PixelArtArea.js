@@ -13,16 +13,22 @@ import PixelArtCanvas from '../PixelArtCanvas/PixelArtCanvas';
 import { setColorPalette } from '../../actions';
 
 const DEFAULT_COLOR_ARR = [
-  "white",
   "black",
-  "green",
-  "darkGrey",
-  "red",
-  "blue",
-  "orange",
-  "pink",
+  "white",
   "yellow",
+  "lightgreen",
+  "green",
+  "aquamarine",
+  "blue",
+  "lightblue",
   "purple",
+  "violet",
+  "red",
+  "orange",
+  "darkorange",
+  "pink",
+  "darkGrey",
+  "brown",
 ];
 
 class PixelArtArea extends Component {
