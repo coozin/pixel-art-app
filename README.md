@@ -6,9 +6,9 @@ Hello iGenius!
 
 > cd pixel-art-app
 
-> npm i
+> yarn
 
-> npm start
+> yarn start
 
 ## screenshots
 
